@@ -4,9 +4,13 @@ from rest_framework import status
 from django.http import Http404
 from .models import Student, Course, YearLevel
 from .serializers import StudentSerializer, CourseSerializer, YearLevelSerializer
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.authentication import TokenAuthentication
 
 
 class CourseListCreateView(APIView):
+    permission_classes = [IsAuthenticated]
+    authentication_classes = [TokenAuthentication]
     def get(self, request):
         courses = Course.objects.all()
         serializer = CourseSerializer(courses, many=True)
@@ -20,6 +24,8 @@ class CourseListCreateView(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class CourseDetailView(APIView):
+    permission_classes = [IsAuthenticated]
+    authentication_classes = [TokenAuthentication]
     def get_object(self, pk):
         try:
             return Course.objects.get(pk=pk)
@@ -53,6 +59,8 @@ class CourseDetailView(APIView):
         return Response(status=status.HTTP_204_NO_CONTENT)
 
 class YearLevelListCreateView(APIView):
+    permission_classes = [IsAuthenticated]
+    authentication_classes = [TokenAuthentication]
     def get(self, request):
         year_levels = YearLevel.objects.all()
         serializer = YearLevelSerializer(year_levels, many=True)
@@ -66,6 +74,8 @@ class YearLevelListCreateView(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class YearLevelDetailView(APIView):
+    permission_classes = [IsAuthenticated]
+    authentication_classes = [TokenAuthentication]
     def get_object(self, pk):
         try:
             return YearLevel.objects.get(pk=pk)
@@ -99,6 +109,8 @@ class YearLevelDetailView(APIView):
         return Response(status=status.HTTP_204_NO_CONTENT)
 
 class StudentListCreateView(APIView):
+    permission_classes = [IsAuthenticated]
+    authentication_classes = [TokenAuthentication]
     """
     GET  -> List all students
     POST -> Create a new student
@@ -117,6 +129,8 @@ class StudentListCreateView(APIView):
 
 
 class StudentDetailView(APIView):
+    permission_classes = [IsAuthenticated]
+    authentication_classes = [TokenAuthentication]
     """
     GET    -> Retrieve a student
     PUT    -> Update a student (full update)
