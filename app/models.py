@@ -17,7 +17,7 @@ class Student(models.Model):
     studentname = models.CharField(max_length=200)
     age = models.IntegerField()
     course = models.ForeignKey(Course, on_delete=models.SET_NULL, null=True)
-    yearlevel = models.ForeignKey(YearLevel, on_delete=models.CASCADE)
+    yearlevel = models.ForeignKey(YearLevel, on_delete=models.SET_NULL, null=True)
     
     def __str__(self):
         return self.studentname

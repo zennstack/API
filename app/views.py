@@ -111,10 +111,6 @@ class YearLevelDetailView(APIView):
 class StudentListCreateView(APIView):
     permission_classes = [IsAuthenticated]
     authentication_classes = [TokenAuthentication]
-    """
-    GET  -> List all students
-    POST -> Create a new student
-    """
     def get(self, request):
         students = Student.objects.all()
         serializer = StudentSerializer(students, many=True)
@@ -131,12 +127,6 @@ class StudentListCreateView(APIView):
 class StudentDetailView(APIView):
     permission_classes = [IsAuthenticated]
     authentication_classes = [TokenAuthentication]
-    """
-    GET    -> Retrieve a student
-    PUT    -> Update a student (full update)
-    PATCH  -> Partial update
-    DELETE -> Delete a student
-    """
     def get_object(self, pk):
         try:
             return Student.objects.get(pk=pk)
